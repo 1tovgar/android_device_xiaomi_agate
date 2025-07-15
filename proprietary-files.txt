@@ -1,1 +1,49 @@
 # Unpinned blobs from agate_global-user 13 TP1A.220624.014 V14.0.6.0.TKWMIXM release-keys
+
+# Batterysecret
+vendor/bin/batterysecret
+
+# Display configs
+vendor/etc/cust_color.xml
+vendor/etc/cust_silky_brightness.xml
+vendor/etc/mdss_dsi_k11t_42_02_0a_dsc_cmd_mi.xml
+
+# Fingerprint
+vendor/lib64/hw/fingerprint.fpc_isee.so:vendor/lib64/hw/fingerprint.fpc.default.so;FIX_SONAME
+vendor/lib64/hw/fingerprint.goodix.so:vendor/lib64/hw/fingerprint.goodix.default.so;FIX_SONAME
+vendor/lib64/libgf_ca.so
+vendor/lib64/libgf_hal.so
+vendor/lib64/libgoodixhwfingerprint.so
+
+# Touch
+vendor/firmware/st_fts_k11st.ftb
+vendor/firmware/st_fts_k11st_htp.ftb
+vendor/firmware/stm_fts_production_limits_k11st.csv
+
+# Thermal
+vendor/bin/mi_thermald
+vendor/etc/thermal-camera.conf
+vendor/etc/thermal-class0.conf
+vendor/etc/thermal-k11r-camera.conf
+vendor/etc/thermal-k11r-class0.conf
+vendor/etc/thermal-k11r-huanji.conf
+vendor/etc/thermal-k11r-mgame.conf
+vendor/etc/thermal-k11r-navigation.conf
+vendor/etc/thermal-k11r-nolimits.conf
+vendor/etc/thermal-k11r-normal.conf
+vendor/etc/thermal-k11r-phone.conf
+vendor/etc/thermal-k11r-tgame.conf
+vendor/etc/thermal-k11r-video.conf
+vendor/etc/thermal-map-k11r.conf
+vendor/etc/thermal-map.conf
+vendor/etc/thermal-mgame.conf
+vendor/etc/thermal-navigation.conf
+vendor/etc/thermal-normal.conf
+vendor/etc/thermal-phone.conf
+vendor/etc/thermal-region-map.conf
+vendor/etc/thermal-tgame.conf
+vendor/etc/thermal-video.conf
+vendor/etc/thermald-devices.conf
+
+# Wi-Fi
+vendor/firmware/wifi.cfg
