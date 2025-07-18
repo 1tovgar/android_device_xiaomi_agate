@@ -3,6 +3,10 @@ on init
     mkdir /storage/usbotg 0700 root root
     write /sys/module/musb_hdrc/parameters/mu3d_force_on 1
 
+on early-fs
+    #Load touch driver
+    exec_background u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules/ fts_touch_spi
+
 on post-fs-data
     mkdir /data/vendor/wlan_logs 0777 root shell
 
