@@ -1,3 +1,8 @@
+# Audio
+ro.vendor.audio.gain.support=true
+ro.vendor.audio.ns.support=true
+ro.vendor.audio.zoom.support=true
+
 # SKU properties
 ro.product.property_source_order=odm,vendor,product,system
 import /vendor/${ro.boot.product.hardware.sku}.build.prop
