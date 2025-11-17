@@ -681,17 +681,6 @@ vendor/firmware/stm_fts_production_limits_k11st.csv
 vendor/bin/mi_thermald
 vendor/etc/thermal-camera.conf
 vendor/etc/thermal-class0.conf
-vendor/etc/thermal-k11r-camera.conf
-vendor/etc/thermal-k11r-class0.conf
-vendor/etc/thermal-k11r-huanji.conf
-vendor/etc/thermal-k11r-mgame.conf
-vendor/etc/thermal-k11r-navigation.conf
-vendor/etc/thermal-k11r-nolimits.conf
-vendor/etc/thermal-k11r-normal.conf
-vendor/etc/thermal-k11r-phone.conf
-vendor/etc/thermal-k11r-tgame.conf
-vendor/etc/thermal-k11r-video.conf
-vendor/etc/thermal-map-k11r.conf
 vendor/etc/thermal-map.conf
 vendor/etc/thermal-mgame.conf
 vendor/etc/thermal-navigation.conf
