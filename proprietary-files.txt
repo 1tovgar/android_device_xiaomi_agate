@@ -672,11 +672,6 @@ vendor/etc/cust_color.xml
 vendor/etc/cust_silky_brightness.xml
 vendor/etc/mdss_dsi_k11t_42_02_0a_dsc_cmd_mi.xml
 
-# Touch
-vendor/firmware/st_fts_k11st.ftb
-vendor/firmware/st_fts_k11st_htp.ftb
-vendor/firmware/stm_fts_production_limits_k11st.csv
-
 # Thermal
 vendor/bin/mi_thermald
 vendor/etc/thermal-camera.conf
