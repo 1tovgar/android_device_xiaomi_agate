@@ -33,4 +33,4 @@ It was released in October 2021.
 | Camera (Front)          | 16 MP, f/2.5, (wide), 1/3.06", 1.0µm                                                                                           |
 
 ## Device picture
-![amber](https://i01.appmifile.com/webfile/globalimg/id/cms/4F9C17DD-D1C9-7767-2428-1062A8701498!800x800!85.jpg)
+![Xiaomi 11T](https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1631682201.8566215!800x800!85.png)
