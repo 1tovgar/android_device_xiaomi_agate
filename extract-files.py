@@ -20,7 +20,9 @@ from extract_utils.main import (
 namespace_imports = [
     'hardware/mediatek',
     'hardware/xiaomi',
-    'vendor/xiaomi/mt6893-common',
+    'hardware/mediatek/libmtkperf_client',
+    'device/xiaomi/agate',
+    'vendor/xiaomi/agate'
 ]
 
 lib_fixups: lib_fixups_user_type = {
@@ -29,15 +31,45 @@ lib_fixups: lib_fixups_user_type = {
 
 blob_fixups: blob_fixups_user_type = {
     'vendor/lib/hw/audio.primary.mt6893.so': blob_fixup()
-        .replace_needed('libalsautils.so', 'libalsautils-v30.so')
-        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
+        .replace_needed('libalsautils.so', 'libalsautilsv2.so')
         .add_needed('libstagefright_foundation-v33.so'),
+    
     ('vendor/lib64/hw/android.hardware.camera.provider@2.6-impl-mediatek.so', 'vendor/lib64/libmtkcam_stdutils.so'): blob_fixup()
         .replace_needed('libutils.so', 'libutils-v32.so'),
+    
     ('vendor/lib64/libSQLiteModule_VER_ALL.so', 'vendor/lib64/lib3a.flash.so', 'vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/lib3a.sensors.color.so', 'vendor/lib64/lib3a.sensors.flicker.so', 'vendor/lib64/libaaa_ltm.so'): blob_fixup()
         .add_needed('liblog.so'),
+    
     'vendor/bin/hw/camerahalserver': blob_fixup()
         .binary_regex_replace(b'/system/lib64', b'/vendor/lib64'),
+    
+    'vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so': blob_fixup()
+        .replace_needed('android.hardware.gnss-V1-ndk_platform.so','android.hardware.gnss-V1-ndk.so'),
+    
+    ('vendor/bin/hw/android.hardware.gnss-service.mediatek', 'vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so'): blob_fixup()
+        .replace_needed('android.hardware.gnss-V1-ndk_platform.so', 'android.hardware.gnss-V1-ndk.so'),
+
+    'vendor/bin/hw/vendor.mediatek.hardware.mtkpower@1.0-service': blob_fixup()
+        .replace_needed('android.hardware.power-V2-ndk_platform.so', 'android.hardware.power-V2-ndk.so')
+        .remove_needed('android.hardware.power-service-mediatek.so'),
+    
+    ('vendor/lib/hw/vendor.mediatek.hardware.bluetooth.audio@2.2-impl.so', 'vendor/lib64/hw/vendor.mediatek.hardware.bluetooth.audio@2.2-impl.so'): blob_fixup()
+        .replace_needed('vendor.mediatek.hardware.audio@6.1.so', 'vendor.mediatek.hardware.audio@7.1.so'),
+
+    'system_ext/lib64/libimsma.so': blob_fixup()
+        .replace_needed('libsink.so', 'libsink-mtk.so')
+        .add_needed('libshim_sink.so'),
+
+    ('vendor/bin/hw/android.hardware.neuralnetworks@1.3-service-mtk-neuron', 'vendor/lib/libnvram.so', 'vendor/lib64/libnvram.so', 'vendor/lib64/libsysenv.so'): blob_fixup()
+        .add_needed('libbase_shim.so'),
+
+    ('vendor/lib64/libalLDC.so', 'vendor/lib64/libalAILDC.so'): blob_fixup()
+        .clear_symbol_version('AHardwareBuffer_allocate')
+        .clear_symbol_version('AHardwareBuffer_describe')
+        .clear_symbol_version('AHardwareBuffer_lock')
+        .clear_symbol_version('AHardwareBuffer_release')
+        .clear_symbol_version('AHardwareBuffer_unlock'),
+        
 }  # fmt: skip
 
 module = ExtractUtilsModule(
@@ -50,5 +82,5 @@ module = ExtractUtilsModule(
 )
 
 if __name__ == '__main__':
-    utils = ExtractUtils.device_with_common(module, 'mt6893-common', module.vendor)
+    utils = ExtractUtils.device(module)
     utils.run()
