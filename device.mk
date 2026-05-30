@@ -69,7 +69,8 @@ PRODUCT_PACKAGES += \
     libnbaio_mono
 
 PRODUCT_PACKAGES += \
-    MtkInCallService
+    MtkInCallService \
+    DolbyManager
 
 # Audio Configs
 PRODUCT_COPY_FILES += \
