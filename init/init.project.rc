@@ -1,11 +1,14 @@
+# MTK project .rc configure
+import /vendor/etc/init/init.batterysecret.rc
+
 on init
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root
     write /sys/module/musb_hdrc/parameters/mu3d_force_on 1
 
-on early-fs
-    #Load touch driver
-    exec_background u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules/ fts_touch_spi
+    # Set xiaomi touch permissions
+    chown system system /dev/xiaomi-touch
+    chmod 0660 /dev/xiaomi-touch
 
 on post-fs-data
     mkdir /data/vendor/wlan_logs 0777 root shell
@@ -70,3 +73,28 @@ on property:sys.boot_completed=1
     copy /vendor/etc/camera/jiiganmodel/dof_model/capture_policy /data/vendor/camera/jiiganmodel/dof_model/capture_policy
     chown cameraserver audio  /data/vendor/camera/jiiganmodel/dof_model/capture_policy
     chmod 0777 /data/vendor/camera/jiiganmodel/dof_model/capture_policy
+
+    # Fingerprint
+    mkdir /data/vendor/misc 01771 system system
+    mkdir /data/vendor/fpc 0770 system system
+    mkdir /data/vendor/fpdump 0770 system system
+    mkdir /data/vendor/gf_data 0770 system system
+    mkdir /data/vendor/goodix 0770 system system
+    mkdir /mnt/vendor/persist/goodix 0770 system system
+
+on boot
+    chmod 0666 /dev/goodix_fp
+    chown system system /dev/goodix_fp
+    chown system system /sys/bus/platform/devices/fingerprint/clk_enable
+    chmod 0660 /sys/bus/platform/devices/fingerprint/clk_enable
+    chown system system /sys/bus/platform/devices/fingerprint/wakeup_enable
+    chmod 0660 /sys/bus/platform/devices/fingerprint/wakeup_enable
+    chown system system /sys/bus/platform/devices/fingerprint/irq
+    chmod 0660 /sys/bus/platform/devices/fingerprint/irq
+    chown system system /sys/bus/platform/devices/fingerprint/hw_reset
+    chmod 0660 /sys/bus/platform/devices/fingerprint/hw_reset
+    chown system system /sys/bus/spi/devices/spi5.0/authen_fd/performance
+    chmod 0660 /sys/bus/spi/devices/spi5.0/authen_fd/performance
+    chown system system /sys/class/drm/card0-DSI-1/disp_param
+    chmod 0664 /sys/class/drm/card0-DSI-1/disp_param
+    chown system system /sys/bus/platform/devices/fingerprint/fingerdown_wait
