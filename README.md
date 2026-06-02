@@ -4,11 +4,11 @@ this device tree is work in progress.
 
 current condition:
 
-compile: yes if prebuilt is used
+compile: yes if prebuilt kernel is used
 
-boot into recovery: not tested
+boot into recovery: yes if prebuilt kernel is used
 
-boot into OS: not tested
+boot into OS: no. dies before even starting OS load.
 
 ---
 
