@@ -4,6 +4,8 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
 LOCAL_PATH := device/xiaomi/agate
 
 # Project ID Quota
@@ -361,15 +363,9 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    libshim_sensors \
-    libsensorndkbridge \
-    android.hardware.sensors@1.0.vendor \
-    android.hardware.sensors@2.1.vendor \
-    android.frameworks.sensorservice@1.0.vendor \
-    android.hardware.sensors-service.xiaomi-multihal
-
-PRODUCT_PACKAGES += \
-    sensors.dynamic_sensor_hal:64
+    android.hardware.sensors@2.0-subhal-impl-1.0:64 \
+    android.hardware.sensors-service.xiaomi-multihal \
+    libsensorndkbridge
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf

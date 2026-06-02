@@ -58,28 +58,39 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml \
     hardware/xiaomi/vintf/xiaomi_framework_compatibility_matrix.xml
     
-# Kernel
-BOARD_DTB_OFFSET := 0x07c08000
+# Kernel (prebuilt)
+BOARD_BOOT_HEADER_VERSION := 2
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_TAGS_OFFSET := 0x07c08000
+BOARD_DTB_OFFSET := 0x07c08000
 BOARD_RAMDISK_OFFSET := 0x11088000
+BOARD_KERNEL_TAGS_OFFSET := 0x07c08000
 
-BOARD_BOOT_HEADER_VERSION := 2
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_KERNEL_IMAGE_NAME := Image.gz
-BOARD_RAMDISK_USE_LZ4 := true
+BOARD_KERNEL_CMDLINE := \
+    androidboot.init_fatal_reboot_target=recovery \
+    bootopt=64S3,32N2,64N2
 
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
-BOARD_KERNEL_CMDLINE += androidboot.serialconsole=0
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)-kernel/kernel
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)-kernel/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)-kernel/dtbo.img
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor-modules/*.ko)
 
-BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS := --base $(BOARD_KERNEL_BASE)
+BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 
-TARGET_KERNEL_SOURCE := kernel/xiaomi/mt6893
-TARGET_KERNEL_CONFIG := agate_defconfig
+BOARD_KERNEL_IMAGE_NAME := Image
+TARGET_KERNEL_CONFIG := amber_user_defconfig
+TARGET_KERNEL_SOURCE := $(DEVICE_PATH)-kernel/kernel-headers
+
+#TODO: nuke prebuilt modules when kernel can compile
+# TARGET_KERNEL_CLANG_VERSION := r498229b # taken from oplus's mt6893 kernel, might work idk
+# TARGET_KERNEL_CONFIG := agate_defconfig
+# TARGET_KERNEL_SOURCE := kernel/xiaomi/agate
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
