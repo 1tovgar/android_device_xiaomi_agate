@@ -100,13 +100,14 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth-service.mediatek \
+    android.hardware.bluetooth@1.0.vendor:64 \
+    android.hardware.bluetooth@1.1.vendor:64 \
     android.hardware.bluetooth.audio-impl
 
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.3-service \
-    android.hardware.memtrack-service.mediatek
+    android.hardware.memtrack-service.mediatek-mali
 
 PRODUCT_PACKAGES += \
     libdrm.vendor \
@@ -152,11 +153,11 @@ PRODUCT_PACKAGES += \
     android.hardware.health@1.0.vendor
 
 # HIDL
-# PRODUCT_PACKAGES += \
-#     libhidltransport \
-#     libhidltransport.vendor \
-#     libhwbinder.vendor \
-#     android.hidl.allocator@1.0.vendor
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhidltransport.vendor \
+    libhwbinder.vendor \
+    android.hidl.allocator@1.0.vendor
 
 # IFAA manager
 PRODUCT_PACKAGES += \
@@ -186,9 +187,6 @@ PRODUCT_PACKAGES += \
 # Light
 PRODUCT_PACKAGES += \
     android.hardware.light-service.lineage
-
-# Lineage Health
-$(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
 
 # Media
 PRODUCT_PACKAGES += \
