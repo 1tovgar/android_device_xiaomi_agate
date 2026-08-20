@@ -79,3 +79,10 @@ prebuilt_etc {
     recovery_available: true,
     vendor: true,
 }
+
+prebuilt_etc {
+    name: "init.mt6893.usb.rc",
+    src: "init.mt6893.usb.rc",
+    sub_dir: "init/hw",
+    vendor: true,
+}
