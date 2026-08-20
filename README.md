@@ -6,9 +6,9 @@ current condition:
 
 compile: yes
 
-boot into recovery: no
+boot into recovery: yes
 
-boot into OS: not tested
+boot into OS: kernel-side problem(?)
 
 ---
 
